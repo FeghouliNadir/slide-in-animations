@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fun lil anims</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
+
+    <section class="section" id="section1">
+        <canvas id="myCanvas1" data-sr="left"></canvas>
+        <div class="rect" data-sr="top">
+            <img src="wavy.png" alt="wavy">
+        </div>
+    </section>
+
+    <section class="section" id="section2">
+        <div class="fade">
+            <canvas id="myCanvas2"></canvas>
+            <div class="rect1" data-sr="right">
+                <img src="wavy.png" alt="wavy">
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="section3">
+        <div class="glitch">
+            <div class="rect2" data-sr="left">
+                <img src="wavy.png" alt="wavy">
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
