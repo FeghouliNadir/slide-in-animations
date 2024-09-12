@@ -12,14 +12,27 @@
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.15/paper-full.min.js"></script>
 
+    <nav class="nav"></nav>
+
     <section class="section" id="section1">
-        <canvas id="myCanvas1" data-sr="left"></canvas>
-        <div class="rect" data-sr="top">
-            <img src="wavy.png" alt="wavy">
+        <div class="wave">
+            <canvas id="myCanvas1" data-sr="left"></canvas>
+            <div class="rect" data-sr="top">
+                <img src="wavy.png" alt="wavy">
+            </div>
         </div>
+        <!-- <div class="text">
+            <h1>wave</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        </div> -->
+
     </section>
 
     <section class="section" id="section2">
+        <!-- <div class="text">
+            <h1>fade</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        </div> -->
         <div class="fade">
             <canvas id="myCanvas2"></canvas>
             <div class="rect1" data-sr="right">
@@ -34,6 +47,11 @@
                 <img src="wavy.png" alt="wavy">
             </div>
         </div>
+        <!-- <div class="text">
+            <h1>glitch</h1>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.</p>
+        </div> -->
+
     </section>
 
     <script src="script.js"></script>

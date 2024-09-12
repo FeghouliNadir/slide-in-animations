@@ -7,6 +7,25 @@ section {
     top: 0;
     width: 100%;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.text {
+    z-index: 999;
+}
+
+.text:nth-child(1) {
+    right: 0;
+}
+
+.text:nth-child(2) {
+    left: 0;
+}  
+
+.text:nth-child(3) {
+    right: 0;
 }
 
 canvas {
@@ -137,6 +156,10 @@ canvas {
 
 @media (max-width: 768px) {
 
+    section {
+        flex-direction: column;
+    }
+
     .rect,
     .rect1,
     .rect2 {
@@ -146,9 +169,9 @@ canvas {
         margin-top: 0;
     }
 
-    .rect {
+    /* .rect {
         display: block;
-    }
+    } */
 
     .fade {
         align-items: flex-start;
@@ -158,9 +181,9 @@ canvas {
         align-items: flex-start;
     }
 
-    #myCanvas1 {
+    /* #myCanvas1 {
         display: none;
-    }
+    } */
 
     #myCanvas2 {
         width: 100%;
