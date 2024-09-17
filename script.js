@@ -121,7 +121,7 @@ else {
 
     var waveAmplitude = 10;
     var waveFrequency = 10;
-    var speed = 0;
+    var speed = 0.1;
     var time = 1;
     var revealDone = false;
 
@@ -211,8 +211,9 @@ document.addEventListener('DOMContentLoaded', randomGlitch);
 function initializeScrollReveal() {
     const isMobile = window.innerWidth < 768;
     const origin1 = isMobile ? 'top' : 'left';
-    const origin2 = isMobile ? 'top' : 'right';
-    ScrollReveal().reveal('[data-sr="left"]', {
+    const origin2 = isMobile ? 'bottom' : 'right';
+    const origin3 = isMobile ? 'bottom' : 'left';
+    ScrollReveal().reveal('[data-sr="one"]', {
         delay: 0,
         duration: 1000,
         distance: '100%',
@@ -225,7 +226,7 @@ function initializeScrollReveal() {
         }
     });
 
-    ScrollReveal().reveal('[data-sr="right"]', {
+    ScrollReveal().reveal('[data-sr="two"]', {
         delay: 0,
         duration: 1000,
         distance: '100%',
@@ -235,6 +236,19 @@ function initializeScrollReveal() {
         // mobile: false,
         beforeReveal: function () {
             initializeParticles();
+        }
+    });
+
+    ScrollReveal().reveal('[data-sr="three"]', {
+        delay: 0,
+        duration: 1000,
+        distance: '100%',
+        origin: origin1,
+        reset: true,
+        scale: 1,
+        afterReveal: function () {
+            revealDone = true;
+            console.log('revealDone');
         }
     });
 
