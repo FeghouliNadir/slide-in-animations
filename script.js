@@ -51,7 +51,6 @@ if (window.innerWidth < 768) {
         }
         if (revealDone && speed > 0) {
             speed -= 0.1;
-            if (speed < 0) speed = 0;
         }
         background.segments[numPoints + 1].point.y = 0;
         background.segments[numPoints + 2].point.y = 0;
@@ -221,8 +220,10 @@ function initializeScrollReveal() {
         reset: true,
         scale: 1,
         afterReveal: function () {
-            revealDone = true;
-            console.log('revealDone');
+            setTimeout(() => {
+                revealDone = true;
+                console.log('revealDone');
+            }, 500);
         }
     });
 
@@ -243,13 +244,9 @@ function initializeScrollReveal() {
         delay: 0,
         duration: 1000,
         distance: '100%',
-        origin: origin1,
+        origin: origin3,
         reset: true,
         scale: 1,
-        afterReveal: function () {
-            revealDone = true;
-            console.log('revealDone');
-        }
     });
 
 
