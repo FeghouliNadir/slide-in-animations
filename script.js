@@ -3,28 +3,24 @@
 paper.setup(document.getElementById('myCanvas1'));
 
 if (window.innerWidth < 768) {
-    // Create points along the bottom of the rectangle
     var numPoints = 20;
     var points = [];
     for (var i = 0; i <= numPoints; i++) {
         var x = (paper.view.size.width / numPoints) * i;
-        var y = paper.view.size.height * 0.3;
+        var y = window.innerHeight * 0.3;
         points.push(new paper.Point(x, y));
     }
 
-    // Create a path for the blue background
     var background = new paper.Path({
         segments: points,
         fillColor: '#193247',
         closed: true
     });
 
-    // Add the top-right, top-left, and bottom-left points of the rectangle
     background.add(new paper.Point(paper.view.size.width, 0));
     background.add(new paper.Point(0, 0));
-    background.add(new paper.Point(0, paper.view.size.height * 0.3));
+    background.add(new paper.Point(0, window.innerHeight * 0.3));
 
-    // Create a separate path for the wave (clipping mask)
     var wave = new paper.Path({
         segments: points.slice(),
         closed: true
@@ -32,38 +28,37 @@ if (window.innerWidth < 768) {
 
     wave.add(new paper.Point(paper.view.size.width, 0));
     wave.add(new paper.Point(0, 0));
-    wave.add(new paper.Point(0, paper.view.size.height * 0.3));
+    wave.add(new paper.Point(0, window.innerHeight * 0.3));
 
-    // Load the image
     var raster = new paper.Raster('wavy.png');
 
-    // Center the image
     raster.position = paper.view.center;
 
-    // Scale the image to fit within the wave
     raster.fitBounds(wave.bounds, true);
 
-    // Create a group with the wave and the image
     var imageGroup = new paper.Group([wave, raster]);
     imageGroup.clipped = true;
 
-    // Animate the wave
+    var speed = 5;
+    var revealDone = false;
+
     paper.view.onFrame = function (event) {
         for (var i = 0; i <= numPoints; i++) {
-            var bgSegment = background.segments[i];
-            var waveSegment = wave.segments[i];
-            var sinus = Math.sin(event.time * 5 + i * 0.5);
-            var newY = paper.view.size.height * 0.3 + sinus * 20;
-            bgSegment.point.y = newY;
-            waveSegment.point.y = newY;
+            var sinus = Math.sin(event.time * speed + i * 0.5);
+            var newY = window.innerHeight * 0.3 + sinus * 20;
+            background.segments[i].point.y = newY;
+            wave.segments[i].point.y = newY;
         }
-        // Keep the corner points fixed
+        if (revealDone && speed > 0) {
+            speed -= 0.1;
+            if (speed < 0) speed = 0;
+        }
         background.segments[numPoints + 1].point.y = 0;
         background.segments[numPoints + 2].point.y = 0;
-        background.segments[numPoints + 3].point.y = paper.view.size.height * 0.3;
+        background.segments[numPoints + 3].point.y = window.innerHeight * 0.3;
         wave.segments[numPoints + 1].point.y = 0;
         wave.segments[numPoints + 2].point.y = 0;
-        wave.segments[numPoints + 3].point.y = paper.view.size.height * 0.3;
+        wave.segments[numPoints + 3].point.y = window.innerHeight * 0.3;
     };
 }
 else {
@@ -126,8 +121,8 @@ else {
 
     var waveAmplitude = 10;
     var waveFrequency = 10;
-    var speed = 0.05;
-    var time = 0;
+    var speed = 0;
+    var time = 1;
     var revealDone = false;
 
     paper.view.onFrame = function left(event) {
@@ -224,6 +219,10 @@ function initializeScrollReveal() {
         origin: origin1,
         reset: true,
         scale: 1,
+        afterReveal: function () {
+            revealDone = true;
+            console.log('revealDone');
+        }
     });
 
     ScrollReveal().reveal('[data-sr="right"]', {
@@ -243,4 +242,3 @@ function initializeScrollReveal() {
 }
 
 initializeScrollReveal();
-
